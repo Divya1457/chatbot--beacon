@@ -1,0 +1,142 @@
+/* --- 1. Font & Background --- */
+body {
+    font-family: 'Google Sans Flex', -apple-system, sans-serif; /* */
+    background: linear-gradient(45deg, #0f172a, #1e293b); /* Dark bg makes glass pop */
+    height: 100vh;
+    margin: 0;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- 2. Glass Chat Window --- */
+#chatWindow {
+    position: fixed;
+    bottom: 90px;
+    right: 20px;
+    width: 350px;
+    height: 520px;
+    background: rgba(255, 255, 255, 0.08); /* Semi-transparent */
+    backdrop-filter: blur(20px);          /* Frosted glass effect */
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    display: none; 
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    z-index: 1000;
+}
+
+/* --- 3. Header --- */
+#chatHeader {
+    padding: 18px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.status { color: #00ff88; font-size: 11px; font-weight: 500; }
+
+/* --- 4. Messages Area --- */
+#chatMessages {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* --- 5. THE BUBBLE FIX --- */
+.message-wrapper {
+    display: flex;
+    width: 100%;
+}
+
+.userMsg { justify-content: flex-end; } /* Pushes user bubble to the right */
+.botMsg { justify-content: flex-start; } /* Pushes bot bubble to the left */
+
+.bubble {
+    padding: 12px 16px;
+    font-size: 14.5px;
+    line-height: 1.5;
+    max-width: 80%;
+    width: fit-content;    /* FIX: Prevents bubble from stretching full-width */
+    display: inline-block; /* FIX: Ensures background wraps text tightly */
+    word-wrap: break-word;
+}
+
+/* User Bubble: Blue Gradient */
+.userMsg .bubble {
+    background: linear-gradient(135deg, #4e5dff 0%, #a066ff 100%) !important;
+    color: white !important;
+    border-radius: 20px 20px 4px 20px; /* Rounded with a small tail */
+    box-shadow: 0 4px 15px rgba(78, 93, 255, 0.3);
+}
+
+/* Bot Bubble: Glassy White */
+.botMsg .bubble {
+    background: rgba(255, 255, 255, 0.12) !important;
+    backdrop-filter: blur(10px);
+    color: #e2e8f0 !important;
+    border-radius: 20px 20px 20px 4px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* --- 6. Input Area --- */
+#chatInput {
+    padding: 18px;
+    background: rgba(0, 0, 0, 0.25);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+#userInput {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    padding: 12px 16px;
+    color: white;
+    outline: none;
+}
+
+#sendBtn {
+    background: #22d3ee;
+    border: none;
+    color: #111;
+    padding: 10px 20px;       /* Added horizontal padding for a button look */
+    border-radius: 12px;      /* Matches the rounded input box style */
+    cursor: pointer;
+    font-family: 'Google Sans Flex', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;      /* Prevents text from wrapping */
+    flex-shrink: 0;           /* Prevents the button from squishing */
+}
+
+#sendBtn:hover {
+    background: #0ea5e9;      /* Subtle hover effect */
+    transform: translateY(-1px);
+}
+
+/* --- 7. Floating Launcher --- */
+#chatbotBubble {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 65px;
+    height: 65px;
+    background: linear-gradient(135deg, #4e5dff 0%, #a066ff 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(78, 93, 255, 0.4);
+}
